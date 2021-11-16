@@ -96,7 +96,9 @@ app.post('/checkin',(req,res)=>{
 });
 
 
-
+/**
+ * hier wird eine liste übergeben und in checkinlist angezeigt
+ */
 app.get('/checkinlist',(req,res)=>{
     res.render('checkinlist', {liste: liste})
 });
