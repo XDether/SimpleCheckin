@@ -1,5 +1,5 @@
 /**
- * Express Initializiert 
+ * Express wird initializiert 
  * Web Framework für node.js
  */
 
@@ -15,9 +15,16 @@ const bodyParser = require('body-parser');
 //const { Console } = require('console');
 app.use(bodyParser.urlencoded({extended:true}));
 
+
+
+/**
+ * express-session wird initializirt
+ * secret = SessionID
+ * saveUninitialized = erlaubts session unbekannte datentypen abzuspeichern
+ */
 const session = require('express-session');
 app.use(session({
-    secret: 'example',
+    secret: 'thisismysecret',
     resave: false,
     saveUninitialized: true
 })) 
@@ -28,6 +35,10 @@ app.use(session({
 app.engine('.ejs', require('ejs').__express);
 app.set('view engine', 'ejs');
 
+
+/**
+ * Liste für die bereits eingechekten Leute
+ */
 liste = [ 
     {vorname: "Alice", nachname: "Schulz" , datum: new Date()}, 
     {vorname: "Bob", nachname: "Harvey", datum: new Date()}, 
@@ -35,7 +46,8 @@ liste = [
 ];
 
 /**
- * Start Website
+ * Startseite
+ * Ein vorname wird übergeben falls man bereits eingcheket ist
  */
 app.get('/',(req,res)=>{
 
@@ -44,7 +56,8 @@ app.get('/',(req,res)=>{
 });
 
 /**
- * Start Website
+ * Startseite
+ * Ein vorname wird übergeben falls man bereits eingcheket ist
  */
 app.get('/index',(req,res)=>{
     res.render('index',{vorname: req.session['vorname']});
