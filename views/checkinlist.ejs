@@ -1,14 +1,24 @@
-<table border="1"> 
-    <tr> 
-        <th>Vorname</th> 
-        <th>Nachname</th>
-        <th>Datum</th> 
-    </tr> 
-    <%for(var i = 0; i < liste.length; i++) {%> 
-    <tr> 
-        <td><%=liste[i].vorname%></td> 
-        <td><%=liste[i].nachname%></td> 
-        <td><%=liste[i].datum%></td> 
-    </tr> 
-    <%}%> 
-</table>
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Liste der eingecheckten</title>
+</head>
+<body>
+    <table border="1"> 
+        <tr> 
+            <th>Vorname</th> 
+            <th>Nachname</th>
+            <th>Datum</th> 
+        </tr> 
+        <%for(var i = 0; i < liste.length; i++) {%> 
+        <tr> 
+            <td><%=liste[i].vorname%></td> 
+            <td><%=liste[i].nachname%></td> 
+            <td><%=liste[i].datum%></td> 
+        </tr> 
+        <%}%> 
+    </table>
+</body>
+
+</html>
+

@@ -1,7 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="de">
 <head>
     <title>Welcome</title>
 </head>
-<body></body>
+<body>
+    <a href="/checkin">Checkin</a>
+    <a href="/checkout">Checkout</a>
+    <a href="/checkinlist">Liste der Eingecheckten</a></br>
+    <%if(vorname != null){%> 
+        <p>Eingelogt als <%=vorname%></p>
+    <%}%> 
+</body>
 </html>

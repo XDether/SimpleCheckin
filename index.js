@@ -38,14 +38,16 @@ liste = [
  * Start Website
  */
 app.get('/',(req,res)=>{
-    res.render('index');
+
+
+    res.render('index',{vorname: req.session['vorname']});
 });
 
 /**
  * Start Website
  */
-app.get('index',(req,res)=>{
-    res.render('index');
+app.get('/index',(req,res)=>{
+    res.render('index',{vorname: req.session['vorname']});
 });
 
 
@@ -74,7 +76,7 @@ app.post('/checkin',(req,res)=>{
 
         liste = liste.concat({vorname: req.session['vorname'], nachname: req.session['nachname'], datum: req.session['datum']});
 
-        res.render('checkinlist',{liste: liste});
+        res.render('index',{vorname: req.session['vorname']});
     }else{
         res.render('alreadycheckedin');
     }
@@ -89,8 +91,13 @@ app.get('/checkout',(req,res)=>{
     if(req.session['vorname'] != null){
         res.render('checkout');
     }else{
-        res.render('index');
+        res.render('notcheckedin');
     }
+});
+
+
+app.get('/checkinlist',(req,res)=>{
+    res.render('checkinlist', {liste: liste})
 });
 
 /**
@@ -98,20 +105,26 @@ app.get('/checkout',(req,res)=>{
  * Session variablen werden auch gelöscht
  */
 app.post('/checkout',(req,res) =>{
-    for(var i = 0; i < liste.length; i++){
-        if(liste[i] === {vorname: req.session['vorname'], nachname: req.session['nachname'], datum: req.session['datum']}){
-            console.log("it worked")
+    if(req.session['vorname'] != null){
+        for(var i = 0; i < liste.length; i++){
+            if(liste[i] === {vorname: req.session['vorname'], nachname: req.session['nachname'], datum: req.session['datum']}){
+                console.log("it worked")
             
-            liste.splice(i,1);
-            delete req.session['vorname'];
-            delete req.session['nachname'];
-            delete req.session['datum'];
-            //res.render('checkin')
-            break;
+                liste.splice(i,1);
+                delete req.session['vorname'];
+                delete req.session['nachname'];
+                delete req.session['datum'];
+                //res.render('checkin')
+                break;
+            }
         }
+    res.render('checkin');
     }
-    res.render('checkin')
-})
+    else
+    {
+        res.render('notcheckedin');
+    }
+});
 
 app.use(express.static(__dirname + '/public'))
 
