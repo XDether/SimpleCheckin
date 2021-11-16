@@ -1,7 +1,7 @@
 # SimpleCheckin
 
 ## Kurzbeschreibung
-Ein kleine simple checkin checkout webapplikation
+Eine kleine simple checkin checkout webapplikation
 
 ## ToDo
 1.  Date() richtig formatieren
