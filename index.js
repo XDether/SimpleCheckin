@@ -95,22 +95,23 @@ app.post('/checkin',(req,res)=>{
     }
 });
 
+
+
+app.get('/checkinlist',(req,res)=>{
+    res.render('checkinlist', {liste: liste})
+});
+
 /**
  * Hier wird die Checkoutseite angezeigt
  * Wenn bereits eingechekt wird man drauf hingewiesen das man nicht eingecheckt ist.
  */
 
-app.get('/checkout',(req,res)=>{
+ app.get('/checkout',(req,res)=>{
     if(req.session['vorname'] != null){
         res.render('checkout');
     }else{
         res.render('notcheckedin');
     }
-});
-
-
-app.get('/checkinlist',(req,res)=>{
-    res.render('checkinlist', {liste: liste})
 });
 
 /**
@@ -120,7 +121,8 @@ app.get('/checkinlist',(req,res)=>{
 app.post('/checkout',(req,res) =>{
     if(req.session['vorname'] != null){
         for(var i = 0; i < liste.length; i++){
-            if(liste[i] === {vorname: req.session['vorname'], nachname: req.session['nachname'], datum: req.session['datum']}){
+            console.log("it worked");
+            if(liste[i].vorname === req.session['vorname']){
                 console.log("it worked")
             
                 liste.splice(i,1);
@@ -131,7 +133,7 @@ app.post('/checkout',(req,res) =>{
                 break;
             }
         }
-    res.render('checkin');
+        res.render('index',{vorname: req.session['vorname']});
     }
     else
     {
